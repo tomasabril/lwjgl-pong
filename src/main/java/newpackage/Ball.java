@@ -7,7 +7,7 @@ package newpackage;
 public class Ball extends GameObject {
 
 	public static final int size = 16;
-	public static final float MAX_VELX = 4;
+	public static final float MAX_VELX = 7;
 	public static final float MAX_VELY = 8;
 	public static final float DAMPING = 0.05f;
 
@@ -24,7 +24,7 @@ public class Ball extends GameObject {
 
 		this.sx = size;
 		this.sy = size;
-		velx = -MAX_VELX;
+		velx = -2f;
 		vely = 0;
 	}
 
@@ -39,6 +39,13 @@ public class Ball extends GameObject {
 		y = startY;
 		vely = 0;
 		velx *= -1;
+		if (velx > 0) {
+			velx = 2.25f;
+		}
+		if (velx < 0) {
+			velx = -2.25f;
+		}
+
 	}
 
 	public void reverseX(float center) {

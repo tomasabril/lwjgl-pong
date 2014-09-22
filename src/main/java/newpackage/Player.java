@@ -25,6 +25,12 @@ public class Player extends GameObject {
 	void update() {
 		if (Physics.checkCollisions(this, ball)) {
 			ball.reverseX(getCenterY());
+			if (ball.velx > 0) {
+				ball.velx += 0.25f;
+			}
+			if (ball.velx < 0) {
+				ball.velx -= 0.25f;
+			}
 		}
 
 	}

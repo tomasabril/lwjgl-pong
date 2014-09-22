@@ -13,6 +13,7 @@ public class Game {
 
 	private List<GameObject> objects;
 	Player player1;
+	Player player2;
 	Ball ball;
 	private int playerScore;
 	private int enemyScore;
@@ -30,10 +31,14 @@ public class Game {
 			Display.getHeight() / 2 - Player.sizey / 2, ball);
 		objects.add(player1);
 
-		Enemy enemy = new Enemy(Display.getWidth() - Enemy.sizex - 5,
-			Display.getHeight() / 2 - Enemy.sizey / 2, ball);
-		objects.add(enemy);
+		player2 = new Player(Display.getWidth() - Player.sizex - 5,
+			Display.getHeight() / 2 - Player.sizey / 2, ball);
+		objects.add(player2);
 
+//		Enemy enemy = new Enemy(Display.getWidth() - Enemy.sizex - 5,
+//			Display.getHeight() / 2 - Enemy.sizey / 2, ball);
+//		objects.add(enemy);
+		
 		Wall wallBottom = new Wall(0, 0,
 			Display.getWidth(),
 			16,
@@ -49,13 +54,17 @@ public class Game {
 	}
 
 	public void getInput() {
-		if (Keyboard.isKeyDown(Keyboard.KEY_W)
-			|| Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			player1.move(1);
 		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_A)
-			|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			player1.move(-1);
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			player2.move(1);
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			player2.move(-1);
 		}
 	}
 
@@ -63,11 +72,11 @@ public class Game {
 		for (GameObject g : objects) {
 			g.update();
 		}
-		if(ball.getX() > Display.getWidth()){
-			playerScore ++;
+		if (ball.getX() > Display.getWidth()) {
+			playerScore++;
 			ball.resetPosition();
 		}
-		if(ball.getX() < 0){
+		if (ball.getX() < 0) {
 			enemyScore++;
 			ball.resetPosition();
 		}
@@ -77,7 +86,7 @@ public class Game {
 		for (GameObject g : objects) {
 			g.render();
 		}
-		Display.setTitle("lwjgl-Pong| Score: " 
+		Display.setTitle("lwjgl-Pong| Score: "
 			+ playerScore + " x " + enemyScore
 			+ "   _ Tomás");
 	}
